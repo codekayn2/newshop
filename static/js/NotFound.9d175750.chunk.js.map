@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/NotFound.9d175750.chunk.js","mappings":"mJAMA,UAF2B,WAAH,OAAS,SAAC,KAAa,GAAE,C","sources":["pages/NotFound.tsx"],"sourcesContent":["import React from 'react';\r\n\r\nimport { NotFoundBlock } from '../components';\r\n\r\nconst NotFound: React.FC = () => <NotFoundBlock/>\r\n\r\nexport default NotFound"],"names":[],"sourceRoot":""}

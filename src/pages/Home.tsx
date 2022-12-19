@@ -3,24 +3,17 @@ import qs from "qs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import {
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
-} from "../redux/slices/filterSlice";
-import {
-  fetchGenerators,
-  SearchGeneratorParams,
-  selectFilter,
-  selectGeneratorData,
-} from "../redux/slices/generatorSlice";
-
 import Caregories from "../components/Categories";
 import Sort, { sortList } from "../components/Sort";
 import GeneratorBlock from "../components/GeneratorBlock";
 import { Skeleton } from "../components/GeneratorBlock/Skeleton";
 import Pagination from "../Pagination";
 import { useAppDispatch } from "../redux/store";
+import { selectFilter } from "../redux/filter/selectors";
+import { setCategoryId, setCurrentPage, setFilters } from "../redux/filter/slice";
+import { fetchGenerators } from "../redux/generator/asyncActions";
+import { selectGeneratorData } from "../redux/generator/selectors";
+import { SearchGeneratorParams } from "../redux/generator/types";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();

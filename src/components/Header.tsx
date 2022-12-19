@@ -1,22 +1,35 @@
-import {Link, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
+import * as React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import logoSvg from "../assets/img/logo.jpg";
 import Search from "./Search";
-import {cartSelector} from "../redux/slices/cartSlice";
+import { cartSelector } from "../redux/cart/selectors";
 
 function Header() {
-  const {items, totalPrice} = useSelector (cartSelector);
-  const location = useLocation ()
+  const { items, totalPrice } = useSelector(cartSelector);
+  const location = useLocation();
+  const isMounted = React.useRef(false);
 
-  const totalCount = items.reduce ((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce(
+    (sum: number, item: any) => sum + item.count,
+    0
+  );
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">
       <div className="container">
         <Link to="/">
           <div className="header__logo">
-            <img width="38" src={logoSvg} alt="Pizza logo"/>
+            <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>Generators KP</h1>
               <p>Генератори по низькій цені</p>
@@ -24,7 +37,7 @@ function Header() {
             </div>
           </div>
         </Link>
-        {location.pathname !== "/cart" && <Search/>}
+        {location.pathname !== "/cart" && <Search />}
         {location.pathname !== "/cart" && (
           <div className="header__cart">
             <Link to="/cart" className="button button--cart">

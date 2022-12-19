@@ -20,7 +20,7 @@ type GeneratorBlockProps = {
 }
 
 
-const GeneratorBlock: React.FC<GeneratorBlockProps> = ({id, title, price, imageUrl, sizes, types}) => {
+export const GeneratorBlock: React.FC<GeneratorBlockProps> = ({id, title, price, imageUrl, sizes, types}) => {
     const dispatch = useDispatch();
     const cartItem = useSelector(cartItemSelectorById(id))
     const [activeType, setActiveType] = React.useState<number>(0);
@@ -99,4 +99,4 @@ const GeneratorBlock: React.FC<GeneratorBlockProps> = ({id, title, price, imageU
     );
 }
 
-export default GeneratorBlock;
+

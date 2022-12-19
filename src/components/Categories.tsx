@@ -6,7 +6,7 @@ type CategoriesProps = {
 }
 const categories = ["Всі", "Дизельний", "Бензиновий", "Газовий"];
 
-const Caregories: React.FC<CategoriesProps>= React.memo(({ value, onChangeCategory }) => {
+export const Categories: React.FC<CategoriesProps>= React.memo(({ value, onChangeCategory }) => {
   return (
     <div className="categories">
       <ul>
@@ -24,4 +24,4 @@ const Caregories: React.FC<CategoriesProps>= React.memo(({ value, onChangeCatego
   );
 }
 )
-export default Caregories;
+

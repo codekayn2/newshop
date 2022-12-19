@@ -3,14 +3,24 @@ import qs from "qs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import Caregories from "../components/Categories";
-import Sort, { sortList } from "../components/Sort";
-import GeneratorBlock from "../components/GeneratorBlock";
-import { Skeleton } from "../components/GeneratorBlock/Skeleton";
-import Pagination from "../Pagination";
+import { sortList } from "../components/Sort";
+
+
+import {
+  Categories,
+  Skeleton,
+  GeneratorBlock,
+  Sort,
+  Pagination,
+} from "../components"
+
 import { useAppDispatch } from "../redux/store";
 import { selectFilter } from "../redux/filter/selectors";
-import { setCategoryId, setCurrentPage, setFilters } from "../redux/filter/slice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/filter/slice";
 import { fetchGenerators } from "../redux/generator/asyncActions";
 import { selectGeneratorData } from "../redux/generator/selectors";
 import { SearchGeneratorParams } from "../redux/generator/types";
@@ -25,11 +35,9 @@ const Home: React.FC = () => {
   const { categoryId, sort, currentPage, searchValue } =
     useSelector(selectFilter);
 
-
-
-const onChangeCategory = React.useCallback((idx: number) => {
-  dispatch(setCategoryId(idx));
-},[])
+  const onChangeCategory = React.useCallback((idx: number) => {
+    dispatch(setCategoryId(idx));
+  }, []);
 
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -104,13 +112,17 @@ const onChangeCategory = React.useCallback((idx: number) => {
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   // ==================================================
-  const generators = items.map((obj: any) => <GeneratorBlock key={obj.id} {...obj} />);
-  const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+  const generators = items.map((obj: any) => (
+    <GeneratorBlock key={obj.id} {...obj} />
+  ));
+  const skeletons = [...new Array(8)].map((_, index) => (
+    <Skeleton key={index} />
+  ));
 
   return (
     <div className="container">
       <div className="content__top">
-        <Caregories value={categoryId} onChangeCategory={onChangeCategory} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort value={sort} />
       </div>
       <h2 className="content__title">Всі генератори</h2>
